@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  GameViewController.h
 //  ObjectiveC_practice
 //
 //  Created by Crystal on 2020/1/6.
@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
-@property (weak, nonatomic) IBOutlet UIImageView *myImageView;
+@interface GameViewController : UIViewController 
+
+
 
 @end
 
+NS_ASSUME_NONNULL_END
