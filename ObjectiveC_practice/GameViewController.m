@@ -10,6 +10,7 @@
 
 @interface GameViewController () <UICollectionViewDataSource , UISearchControllerDelegate>
 
+@property (strong, nonatomic) NSString *content;
 @property (nonatomic, getter=isChosen) BOOL chosen;
 @property (nonatomic, getter=isMatched) BOOL matched;
 
@@ -50,8 +51,14 @@
 }
 
 #pragma mark - 👉 UICollectionViewDataSource
-
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+/*
+ func collectionView(
+ _ collectionView: UICollectionView,
+ cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+*/
+- (nonnull __kindof UICollectionViewCell *)
+    collectionView: (nonnull UICollectionView *)collectionView
+    cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
 //    UICollectionViewCell *myCollectionViewCell =
     return [UICollectionViewCell alloc];
@@ -75,7 +82,7 @@
 }
 */
 
-// 改名
+// 改名也是自動建好
 - (BOOL)isChosen {
     return _chosen;
 }

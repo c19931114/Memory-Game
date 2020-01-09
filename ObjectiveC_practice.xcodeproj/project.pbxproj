@@ -13,6 +13,7 @@
 		BA28A30423C2DD6A00ADA9D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA28A30323C2DD6A00ADA9D4 /* Assets.xcassets */; };
 		BA28A30723C2DD6A00ADA9D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA28A30523C2DD6A00ADA9D4 /* LaunchScreen.storyboard */; };
 		BA28A30A23C2DD6A00ADA9D4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA28A30923C2DD6A00ADA9D4 /* main.m */; };
+		BA2BC82223C72C42002374AA /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2BC82123C72C42002374AA /* Card.m */; };
 		BA434DBC23C32A5700059520 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA434DBB23C32A5700059520 /* GameViewController.m */; };
 		BA6DF4A823C4764900673F62 /* UIColor+NewColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6DF4A723C4764900673F62 /* UIColor+NewColor.m */; };
 		BA6DF4AE23C5D9F100673F62 /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6DF4AC23C5D9F100673F62 /* CardCell.m */; };
@@ -30,6 +31,8 @@
 		BA28A30623C2DD6A00ADA9D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA28A30823C2DD6A00ADA9D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA28A30923C2DD6A00ADA9D4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BA2BC82023C72C42002374AA /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		BA2BC82123C72C42002374AA /* Card.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		BA434DBA23C32A5700059520 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		BA434DBB23C32A5700059520 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		BA6DF4A623C4764900673F62 /* UIColor+NewColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+NewColor.h"; sourceTree = "<group>"; };
@@ -79,6 +82,8 @@
 				BA6DF4B023C5DC5600673F62 /* CardCell.h */,
 				BA6DF4AC23C5D9F100673F62 /* CardCell.m */,
 				BA6DF4AD23C5D9F100673F62 /* CardCell.xib */,
+				BA2BC82023C72C42002374AA /* Card.h */,
+				BA2BC82123C72C42002374AA /* Card.m */,
 				BA28A30323C2DD6A00ADA9D4 /* Assets.xcassets */,
 				BA28A30523C2DD6A00ADA9D4 /* LaunchScreen.storyboard */,
 				BA28A30823C2DD6A00ADA9D4 /* Info.plist */,
@@ -165,6 +170,7 @@
 				BA6DF4A823C4764900673F62 /* UIColor+NewColor.m in Sources */,
 				BA28A2FF23C2DD6800ADA9D4 /* ViewController.m in Sources */,
 				BA28A30A23C2DD6A00ADA9D4 /* main.m in Sources */,
+				BA2BC82223C72C42002374AA /* Card.m in Sources */,
 				BA28A2FC23C2DD6800ADA9D4 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
