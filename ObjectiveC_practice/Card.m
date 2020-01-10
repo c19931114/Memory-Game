@@ -11,8 +11,13 @@
 @implementation Card
 
 
-- (int)match: (Card *)card {
+- (int)match: (Card *)otherCards {
     int score = 0;
+    
+    if ([otherCards.contents isEqualToString:self.contents]) {
+        score = 1;
+    }
+        
     return score;
 }
 
@@ -40,7 +45,7 @@ func match(toCards card: Card?) -> Int {
     return score;
 }
 func match(to card: Card?) -> Int {
- let score = 0
+    let score = 0
     return score
 }
 ===================================

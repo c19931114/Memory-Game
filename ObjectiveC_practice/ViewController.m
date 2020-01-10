@@ -100,7 +100,7 @@
                                 storyboardWithName:@"Main"
                                 bundle:nil];
     
-    UIViewController *gameViewController = [storyboard instantiateViewControllerWithIdentifier:@"GameViewController"];
+    GameViewController *gameViewController = [storyboard instantiateViewControllerWithIdentifier:@"GameViewController"];
     
     [self.navigationController pushViewController: gameViewController animated: YES];
 }

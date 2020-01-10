@@ -34,7 +34,7 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="276" height="250"/>
             <connections>
-                <outlet property="cardImageView" destination="zio-f5-Nba" id="Pd6-aD-Vmc"/>
+                <outlet property="imageview" destination="zio-f5-Nba" id="Ezz-pd-Vtc"/>
             </connections>
             <point key="canvasLocation" x="84" y="58"/>
         </collectionViewCell>
