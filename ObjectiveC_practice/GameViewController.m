@@ -11,7 +11,8 @@
 
 @interface GameViewController () <UICollectionViewDataSource , UICollectionViewDelegateFlowLayout>
 {
-    int row;
+    NSArray *images;
+//    int row;
     CGSize fullScreenSize;
     
 }
@@ -31,13 +32,14 @@
 
 - (void)loadView {
     [super loadView];
-    row = 3;
-    fullScreenSize = UIScreen.mainScreen.bounds.size;
+//    row = 3;
+//    fullScreenSize = UIScreen.mainScreen.bounds.size;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setupParams];
     [self initView];
     [self setupCollectionView];
     NSLog(@"%@", self.content);
@@ -46,6 +48,32 @@
 }
 
 - (void)setupParams {
+
+    self.row = 3;
+    fullScreenSize = UIScreen.mainScreen.bounds.size;
+    images = [[NSArray alloc] initWithObjects:
+
+               @"c37e471cbda190a9c8cce3892d3fda26.jpg",
+               @"charlie_1_20160614_1804687380.jpg",
+               @"ciwHbm-L.jpg",
+               @"colour_blocks.jpg",
+               @"dream-image.jpg",
+               @"Image Essentials Stetson.jpg",
+               @"image-3-512x512.jpg",
+               @"image.jpg",
+               @"cropped-image-17.jpg",
+               @"peppers.png",
+               @"on_the_phone.jpg",
+               @"texture.jpg",
+               @"Superdomo-la-rioja-image.jpg",
+               @"Snapshot _ Roby  Coccy  IRDS 123 224 22 - Adulti.png",
+               @"Lichtenstein_img_processing_test.png",
+               @"Snapshot _ Roby  Coccy  IRDS 101 180 22 - Adulti.png",
+               @"Snapshot _ Roby  Coccy  IRDS 123 224 22 - Adulti",
+               @"Superdomo-la-rioja-image.jpg",
+               @"texture.jpg"
+
+               ,nil];
     
 }
 
@@ -85,8 +113,8 @@
     cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
     CardCell *cell = [collectionView
-                                  dequeueReusableCellWithReuseIdentifier:@"CardCell"
-                                  forIndexPath:indexPath];
+                        dequeueReusableCellWithReuseIdentifier:@"CardCell"
+                        forIndexPath:indexPath];
     cell.layer.cornerRadius = cell.bounds.size.height / 2;
     cell.layer.borderColor = UIColor.blueColor.CGColor;
     cell.layer.borderWidth = 3;
@@ -96,7 +124,7 @@
 - (NSInteger)collectionView:
     (nonnull UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-    return row * row;
+    return self.row * self.row;
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -106,7 +134,7 @@
     layout:(UICollectionViewLayout *)collectionViewLayout
     sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGFloat width = collectionView.bounds.size.width / (row * 2 - 1);
+    CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
     NSLog(@"%@, %f", @"aaa sizeForItemAtIndexPath", width);
     return CGSizeMake(width, width);
 }
@@ -116,7 +144,7 @@
     layout:(UICollectionViewLayout *)collectionViewLayout
     minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     
-    CGFloat width = collectionView.bounds.size.width / (row * 2 - 1);
+    CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
     NSLog(@"%@, %f", @"aaa minimumInteritemSpacingForSectionAtIndex", width);
     return width;
 }
@@ -125,7 +153,7 @@
     collectionView layout:(UICollectionViewLayout *)collectionViewLayout
     minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
-    CGFloat width = collectionView.bounds.size.width / (row * 2 - 1);
+    CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
     NSLog(@"%@, %f", @"aaa minimumLineSpacingForSectionAtIndex", width);
     return width;
 }
