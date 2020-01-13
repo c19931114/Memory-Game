@@ -31,7 +31,7 @@
 
 - (void)loadView {
     [super loadView];
-    row = 4;
+    row = 3;
     fullScreenSize = UIScreen.mainScreen.bounds.size;
 }
 
@@ -107,6 +107,7 @@
     sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     CGFloat width = collectionView.bounds.size.width / (row * 2 - 1);
+    NSLog(@"%@, %f", @"aaa sizeForItemAtIndexPath", width);
     return CGSizeMake(width, width);
 }
 
@@ -116,6 +117,7 @@
     minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     
     CGFloat width = collectionView.bounds.size.width / (row * 2 - 1);
+    NSLog(@"%@, %f", @"aaa minimumInteritemSpacingForSectionAtIndex", width);
     return width;
 }
 
@@ -124,6 +126,7 @@
     minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     CGFloat width = collectionView.bounds.size.width / (row * 2 - 1);
+    NSLog(@"%@, %f", @"aaa minimumLineSpacingForSectionAtIndex", width);
     return width;
 }
 
