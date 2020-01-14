@@ -11,10 +11,11 @@
 
 @interface GameViewController () <UICollectionViewDataSource , UICollectionViewDelegateFlowLayout>
 {
-    NSArray *images;
+    NSArray *imageNames;
+    NSMutableArray *pickedNames;
 //    int row;
     CGSize fullScreenSize;
-    
+    NSString *chosenImageName;
 }
 @property (strong, nonatomic) NSString *content;
 @property (nonatomic, getter=isChosen) BOOL chosen;
@@ -42,6 +43,7 @@
     [self setupParams];
     [self initView];
     [self setupCollectionView];
+
     NSLog(@"%@", self.content);
     NSLog(self.chosen ? @"YES" : @"NO");
     NSLog(self.matched ? @"YES" : @"NO");
@@ -49,39 +51,72 @@
 
 - (void)setupParams {
 
-    self.row = 3;
+    //initialize and set then ready to accept elements
+//    pickedNames = [[NSMutableArray alloc] init];
+    self.row = 6;
     fullScreenSize = UIScreen.mainScreen.bounds.size;
-    images = [[NSArray alloc] initWithObjects:
+    imageNames = [NSMutableArray new];
+    pickedNames = [NSMutableArray new];//[[NSMutableArray alloc] initWithArray:@[@"first"]];
+    [self setupPickedImages];
 
-               @"c37e471cbda190a9c8cce3892d3fda26.jpg",
-               @"charlie_1_20160614_1804687380.jpg",
-               @"ciwHbm-L.jpg",
-               @"colour_blocks.jpg",
-               @"dream-image.jpg",
-               @"Image Essentials Stetson.jpg",
-               @"image-3-512x512.jpg",
-               @"image.jpg",
-               @"cropped-image-17.jpg",
-               @"peppers.png",
-               @"on_the_phone.jpg",
-               @"texture.jpg",
-               @"Superdomo-la-rioja-image.jpg",
-               @"Snapshot _ Roby  Coccy  IRDS 123 224 22 - Adulti.png",
-               @"Lichtenstein_img_processing_test.png",
-               @"Snapshot _ Roby  Coccy  IRDS 101 180 22 - Adulti.png",
-               @"Snapshot _ Roby  Coccy  IRDS 123 224 22 - Adulti",
-               @"Superdomo-la-rioja-image.jpg",
-               @"texture.jpg"
+}
 
-               ,nil];
-    
+- (void)setupPickedImages {
+
+    imageNames = [[NSArray alloc] initWithObjects:
+
+                  @"1-animal-dog-pet-sad.jpg",
+                  @"0207-1.jpg",
+                  @"18015021.jpg",
+                  @"c37e471cbda190a9c8cce3892d3fda26.jpg",
+                  @"charlie_1_20160614_1804687380.jpg",
+                  @"ciwHbm-L.jpg",
+                  @"colour_blocks.jpg",
+                  @"dream-image.jpg",
+                  @"Image Essentials Stetson.jpg",
+                  @"image-3-512x512.jpg",
+                  @"image.jpg",
+                  @"cropped-image-17.jpg",
+                  @"peppers.png",
+                  @"on_the_phone.jpg",
+                  @"texture.jpg",
+                  @"Superdomo-la-rioja-image.jpg",
+                  @"Snapshot _ Roby  Coccy  IRDS 123 224 22 - Adulti.png",
+                  @"Lichtenstein_img_processing_test.png",
+                  @"Snapshot _ Roby  Coccy  IRDS 101 180 22 - Adulti.png",
+                  @"Superdomo-la-rioja-image.jpg",
+                  nil];
+
+    int remaining = (self.row * self.row) / 2;
+    if (imageNames.count >= remaining) {
+        while (remaining > 0) {
+
+            NSUInteger randomIndex = arc4random() % imageNames.count;
+            NSString *imageName = imageNames[randomIndex];
+            NSLog(@"%@, %lu", @"randomIndex",(unsigned long)randomIndex);
+            if (![pickedNames containsObject:imageName]) {
+                [pickedNames addObject:imageName];
+                remaining--;
+            }
+        }
+    }
+
+    [pickedNames addObjectsFromArray:pickedNames];
+
+    for (int i = 0; i < pickedNames.count; i++) {
+        int nElements = (int)pickedNames.count - i;
+        int n = (arc4random() % nElements) + i;
+        [pickedNames exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+    NSLog(@"%@, %@", @"pickedNames2:",pickedNames);
+
 }
 
 - (void)initView {
     
 //    [self.view setBackgroundColor: UIColor.whiteColor];
-    self.view.backgroundColor = UIColor.whiteColor;
-    
+//    self.view.backgroundColor = UIColor.whiteColor;
+
 }
 
 - (void)setupCollectionView {
@@ -103,6 +138,16 @@
 }
 
 #pragma mark - 👉 UICollectionViewDataSource
+
+- (NSInteger)collectionView:
+(nonnull UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
+
+    int count = self.row * self.row;
+    //    NSLog(@"%d", count);
+    return count;
+}
+
 /*
  func collectionView(
  _ collectionView: UICollectionView,
@@ -111,23 +156,60 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:
     (nonnull UICollectionView *)collectionView
     cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    
+
+    NSString *imageName = pickedNames[indexPath.row];
+    UIImage *image = [UIImage imageNamed: imageName];
+//    UIImage *image = [UIImage imageNamed:@"%@", imageNames[indexPath.row]];
+//    NSLog(@"%@", imageNames[indexPath.row]);
     CardCell *cell = [collectionView
                         dequeueReusableCellWithReuseIdentifier:@"CardCell"
                         forIndexPath:indexPath];
-    cell.layer.cornerRadius = cell.bounds.size.height / 2;
-    cell.layer.borderColor = UIColor.blueColor.CGColor;
+    cell.layer.cornerRadius = 5;//cell.bounds.size.height / 2;
+    cell.layer.borderColor = UIColor.whiteColor.CGColor;
     cell.layer.borderWidth = 3;
+    cell.imageview.image = image;
+//    [UIImage imageNamed:@"who_am_i"];
     return cell;
 }
 
-- (NSInteger)collectionView:
-    (nonnull UICollectionView *)collectionView
-     numberOfItemsInSection:(NSInteger)section {
-    return self.row * self.row;
+
+
+
+
+
+
+
+
+
+#pragma mark - 👉 UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    NSString *imageName = pickedNames[indexPath.row];
+
+    if (self.chosen) {
+        // choose seconcd card
+        self.chosen = false;
+
+        if (chosenImageName == imageName) {
+            // is matched
+        } else {
+            // not matched
+        }
+
+    } else {
+        // choose first card
+        self.chosen = true;
+        chosenImageName = imageName;
+    }
+
+    if (self.matched) {
+
+    }
+
 }
 
-#pragma mark - UICollectionViewDelegateFlowLayout
+#pragma mark - 👉 UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:
     (UICollectionView *)collectionView
@@ -135,7 +217,7 @@
     sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
-    NSLog(@"%@, %f", @"aaa sizeForItemAtIndexPath", width);
+//    NSLog(@"%@, %f", @"👉 sizeForItemAtIndexPath", width);
     return CGSizeMake(width, width);
 }
 
@@ -145,7 +227,7 @@
     minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     
     CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
-    NSLog(@"%@, %f", @"aaa minimumInteritemSpacingForSectionAtIndex", width);
+//    NSLog(@"%@, %f", @"👉 minimumInteritemSpacingForSectionAtIndex", width);
     return width;
 }
 
@@ -154,7 +236,7 @@
     minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
-    NSLog(@"%@, %f", @"aaa minimumLineSpacingForSectionAtIndex", width);
+//    NSLog(@"%@, %f", @"👉 minimumLineSpacingForSectionAtIndex", width);
     return width;
 }
 

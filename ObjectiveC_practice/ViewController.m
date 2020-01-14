@@ -101,7 +101,7 @@
                                 bundle:nil];
     
     GameViewController *gameViewController = [storyboard instantiateViewControllerWithIdentifier:@"GameViewController"];
-    
+//    gameViewController.row = 4;
     [self.navigationController pushViewController: gameViewController animated: YES];
 }
 

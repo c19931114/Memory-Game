@@ -35,6 +35,10 @@
 		F136467723CC20FB00A565C9 /* peppers.png in Resources */ = {isa = PBXBuildFile; fileRef = F136466623CC20FB00A565C9 /* peppers.png */; };
 		F136467823CC20FB00A565C9 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F136466723CC20FB00A565C9 /* image.jpg */; };
 		F136467923CC20FB00A565C9 /* ciwHbm-L.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F136466823CC20FB00A565C9 /* ciwHbm-L.jpg */; };
+		F136468023CC49E000A565C9 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = F136467F23CC49E000A565C9 /* Deck.m */; };
+		F136468423CD8F0800A565C9 /* 0207-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F136468123CD8F0800A565C9 /* 0207-1.jpg */; };
+		F136468523CD8F0800A565C9 /* 1-animal-dog-pet-sad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F136468223CD8F0800A565C9 /* 1-animal-dog-pet-sad.jpg */; };
+		F136468623CD8F0800A565C9 /* 18015021.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F136468323CD8F0800A565C9 /* 18015021.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +78,11 @@
 		F136466623CC20FB00A565C9 /* peppers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peppers.png; sourceTree = "<group>"; };
 		F136466723CC20FB00A565C9 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		F136466823CC20FB00A565C9 /* ciwHbm-L.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ciwHbm-L.jpg"; sourceTree = "<group>"; };
+		F136467E23CC49E000A565C9 /* Deck.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		F136467F23CC49E000A565C9 /* Deck.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		F136468123CD8F0800A565C9 /* 0207-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "0207-1.jpg"; sourceTree = "<group>"; };
+		F136468223CD8F0800A565C9 /* 1-animal-dog-pet-sad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1-animal-dog-pet-sad.jpg"; sourceTree = "<group>"; };
+		F136468323CD8F0800A565C9 /* 18015021.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 18015021.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,16 +117,15 @@
 			children = (
 				BA28A2FA23C2DD6800ADA9D4 /* AppDelegate.h */,
 				BA28A2FB23C2DD6800ADA9D4 /* AppDelegate.m */,
+				BA28A30023C2DD6800ADA9D4 /* Main.storyboard */,
 				BA28A2FD23C2DD6800ADA9D4 /* ViewController.h */,
 				BA28A2FE23C2DD6800ADA9D4 /* ViewController.m */,
-				BA28A30023C2DD6800ADA9D4 /* Main.storyboard */,
 				BA434DBA23C32A5700059520 /* GameViewController.h */,
 				BA434DBB23C32A5700059520 /* GameViewController.m */,
 				BA6DF4B023C5DC5600673F62 /* CardCell.h */,
 				BA6DF4AC23C5D9F100673F62 /* CardCell.m */,
 				BA6DF4AD23C5D9F100673F62 /* CardCell.xib */,
-				BA2BC82023C72C42002374AA /* Card.h */,
-				BA2BC82123C72C42002374AA /* Card.m */,
+				F136467D23CC48E900A565C9 /* Stanford */,
 				BA28A30323C2DD6A00ADA9D4 /* Assets.xcassets */,
 				F136465723CC20FB00A565C9 /* images */,
 				BA28A30523C2DD6A00ADA9D4 /* LaunchScreen.storyboard */,
@@ -132,6 +140,9 @@
 		F136465723CC20FB00A565C9 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F136468223CD8F0800A565C9 /* 1-animal-dog-pet-sad.jpg */,
+				F136468123CD8F0800A565C9 /* 0207-1.jpg */,
+				F136468323CD8F0800A565C9 /* 18015021.jpg */,
 				F136465823CC20FB00A565C9 /* on_the_phone.jpg */,
 				F136465923CC20FB00A565C9 /* image-3-512x512.jpg */,
 				F136465A23CC20FB00A565C9 /* colour_blocks.jpg */,
@@ -151,6 +162,17 @@
 				F136466823CC20FB00A565C9 /* ciwHbm-L.jpg */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		F136467D23CC48E900A565C9 /* Stanford */ = {
+			isa = PBXGroup;
+			children = (
+				BA2BC82023C72C42002374AA /* Card.h */,
+				BA2BC82123C72C42002374AA /* Card.m */,
+				F136467E23CC49E000A565C9 /* Deck.h */,
+				F136467F23CC49E000A565C9 /* Deck.m */,
+			);
+			path = Stanford;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +250,10 @@
 				F136466E23CC20FB00A565C9 /* Snapshot _ Roby  Coccy  IRDS 123 224 22 - Adulti.png in Resources */,
 				F136466C23CC20FB00A565C9 /* dream-image.jpg in Resources */,
 				F136467523CC20FB00A565C9 /* texture.jpg in Resources */,
+				F136468423CD8F0800A565C9 /* 0207-1.jpg in Resources */,
 				F136467223CC20FB00A565C9 /* Snapshot _ Roby  Coccy  IRDS 101 180 22 - Adulti.png in Resources */,
+				F136468523CD8F0800A565C9 /* 1-animal-dog-pet-sad.jpg in Resources */,
+				F136468623CD8F0800A565C9 /* 18015021.jpg in Resources */,
 				F136466D23CC20FB00A565C9 /* Lichtenstein_img_processing_test.png in Resources */,
 				F136467823CC20FB00A565C9 /* image.jpg in Resources */,
 			);
@@ -241,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F136468023CC49E000A565C9 /* Deck.m in Sources */,
 				BA434DBC23C32A5700059520 /* GameViewController.m in Sources */,
 				BA6DF4AE23C5D9F100673F62 /* CardCell.m in Sources */,
 				BA6DF4A823C4764900673F62 /* UIColor+NewColor.m in Sources */,
