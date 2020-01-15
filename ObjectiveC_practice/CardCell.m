@@ -70,7 +70,7 @@
 
     [UIView
      transitionWithView:self.imageView
-     duration:.5
+     duration:.2
      options:animationType animations:^{
 
          NSLog(@"%lu", (unsigned long)animationType);

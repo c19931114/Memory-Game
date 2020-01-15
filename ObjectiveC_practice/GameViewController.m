@@ -55,7 +55,7 @@
 
     //initialize and set then ready to accept elements
 //    pickedNames = [[NSMutableArray alloc] init];
-    self.row = 2; // 只能偶數
+    self.row = 4; // 只能偶數
     fullScreenSize = UIScreen.mainScreen.bounds.size;
     imageNames = [NSMutableArray new];
     pickedNames = [NSMutableArray new];//[[NSMutableArray alloc] initWithArray:@[@"first"]];
@@ -220,7 +220,7 @@
              // Put your code which should be executed with a delay here
              }
              */
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 NSLog(@"Do some work");
                 CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->firstIndexPath];
@@ -234,7 +234,7 @@
         } else {
             // not matched
 
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 NSLog(@"Do some work");
                 CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->firstIndexPath];
