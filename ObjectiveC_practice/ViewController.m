@@ -57,9 +57,7 @@
 //    if (!self.isTapAllowed) { return; } // 加這行只能按一次
     
     self.isTapAllowed = !self.isTapAllowed;
- 
     [self flipCard:self.isTapAllowed];
-
 }
 
 - (void)flipCard: (BOOL)isTapAllowed {
@@ -72,10 +70,10 @@
      duration:.5
      options:animationType animations:^{
             
-        NSLog(@"%lu", (unsigned long)animationType);
+//        NSLog(@"%lu", (unsigned long)animationType);
 //        __weak typeof (self) weakSelf = self;
 //        weakSelf.myImageView.image = [UIImage imageNamed:@"who_am_i"];
-        self.myImageView.image = self.isTapAllowed ?
+        self.myImageView.image = isTapAllowed ?
             [UIImage imageNamed:@"noImg"] : [UIImage imageNamed:@"who_am_i"];
                 
     } completion:^(BOOL finished) {

@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="who_am_i" translatesAutoresizingMaskIntoConstraints="NO" id="QAG-t8-qaE">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImg" translatesAutoresizingMaskIntoConstraints="NO" id="QAG-t8-qaE">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                         <color key="backgroundColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </imageView>
@@ -34,12 +34,12 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="276" height="250"/>
             <connections>
-                <outlet property="imageview" destination="QAG-t8-qaE" id="NDM-ze-KGA"/>
+                <outlet property="imageView" destination="QAG-t8-qaE" id="NDM-ze-KGA"/>
             </connections>
             <point key="canvasLocation" x="84" y="58"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="who_am_i" width="754" height="748"/>
+        <image name="noImg" width="512" height="512"/>
     </resources>
 </document>

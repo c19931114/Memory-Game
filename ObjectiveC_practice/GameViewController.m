@@ -16,9 +16,11 @@
 //    int row;
     CGSize fullScreenSize;
     NSString *chosenImageName;
+    NSIndexPath *firstIndexPath;
+    NSIndexPath *secondIndexPath;
 }
 @property (strong, nonatomic) NSString *content;
-@property (nonatomic, getter=isChosen) BOOL chosen;
+@property (nonatomic, getter=isChoosing) BOOL choosing;
 @property (nonatomic, getter=isMatched) BOOL matched;
 //@property (nonatomic) CGSize fullScreenSize;
 
@@ -28,7 +30,7 @@
 
 @implementation GameViewController
 
-@synthesize chosen = _chosen;
+@synthesize choosing = _choosing;
 @synthesize matched = _matched;
 
 - (void)loadView {
@@ -44,16 +46,16 @@
     [self initView];
     [self setupCollectionView];
 
-    NSLog(@"%@", self.content);
-    NSLog(self.chosen ? @"YES" : @"NO");
-    NSLog(self.matched ? @"YES" : @"NO");
+//    NSLog(@"%@", self.content);
+//    NSLog(self.chosen ? @"YES" : @"NO");
+//    NSLog(self.matched ? @"YES" : @"NO");
 }
 
 - (void)setupParams {
 
     //initialize and set then ready to accept elements
 //    pickedNames = [[NSMutableArray alloc] init];
-    self.row = 6;
+    self.row = 2; // 只能偶數
     fullScreenSize = UIScreen.mainScreen.bounds.size;
     imageNames = [NSMutableArray new];
     pickedNames = [NSMutableArray new];//[[NSMutableArray alloc] initWithArray:@[@"first"]];
@@ -148,6 +150,7 @@
     return count;
 }
 
+
 /*
  func collectionView(
  _ collectionView: UICollectionView,
@@ -157,57 +160,156 @@
     (nonnull UICollectionView *)collectionView
     cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
 
-    NSString *imageName = pickedNames[indexPath.row];
-    UIImage *image = [UIImage imageNamed: imageName];
 //    UIImage *image = [UIImage imageNamed:@"%@", imageNames[indexPath.row]];
 //    NSLog(@"%@", imageNames[indexPath.row]);
     CardCell *cell = [collectionView
-                        dequeueReusableCellWithReuseIdentifier:@"CardCell"
-                        forIndexPath:indexPath];
-    cell.layer.cornerRadius = 5;//cell.bounds.size.height / 2;
-    cell.layer.borderColor = UIColor.whiteColor.CGColor;
-    cell.layer.borderWidth = 3;
-    cell.imageview.image = image;
-//    [UIImage imageNamed:@"who_am_i"];
+                      dequeueReusableCellWithReuseIdentifier:@"CardCell"
+                      forIndexPath:indexPath];
+
+    NSString *imageName = pickedNames[indexPath.row];
+    cell.imageName = imageName;
+//    [cell setImageName:imageName];
+
+//    [cell setFlipppppp:^MatchStatus(NSString * _Nonnull cardName) {
+//        NSLog(@"%@, %@", @"cardName", cardName);
+//        __weak typeof (self) weakSelf = self;
+//
+//        if (self.chosen) {
+//            // choose seconcd card
+//            self.chosen = false;
+//
+//            if (self->chosenImageName == cardName) {
+//                // is matched
+//                return isMatched;
+//
+//            } else {
+//                // not matched
+//                return unMatched;
+//            }
+//
+//        } else {
+//            // choose first card
+//            weakSelf.chosen = true;
+//            self->chosenImageName = cardName;
+//            return choosing;
+//        }
+//    }];
+
     return cell;
 }
-
-
-
-
-
-
-
-
-
 
 #pragma mark - 👉 UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     NSString *imageName = pickedNames[indexPath.row];
-
-    if (self.chosen) {
+    if (self.choosing) {
         // choose seconcd card
-        self.chosen = false;
+        self.choosing = false;
 
+        secondIndexPath = indexPath;
+        CardCell *secondCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->secondIndexPath];
+        [secondCell flipCard:YES];
+
+
+        if (chosenImageName == imageName) {
+            // is matched
+            /*
+             let seconds = 4.0
+             DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+             // Put your code which should be executed with a delay here
+             }
+             */
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                NSLog(@"Do some work");
+                CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->firstIndexPath];
+//                [firstCell flipCard:NO];
+                firstCell.userInteractionEnabled = NO;
+                CardCell *secondCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->secondIndexPath];
+//                [secondCell flipCard:NO];
+                secondCell.userInteractionEnabled = NO;
+            });
+
+        } else {
+            // not matched
+
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                NSLog(@"Do some work");
+                CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->firstIndexPath];
+                [firstCell flipCard:NO];
+                CardCell *secondCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->secondIndexPath];
+                [secondCell flipCard:NO];
+            });
+        }
+        chosenImageName = @"";
+
+    } else {
+        // choose first card
+        self.choosing = true;
+        chosenImageName = imageName;
+
+        firstIndexPath = indexPath;
+        CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:firstIndexPath];
+        [firstCell flipCard:YES];
+    }
+
+
+
+
+/*
+//    NSString *imageName = pickedNames[indexPath.row];
+    if (self.choosing) {
+        // choose seconcd card
+        self.choosing = false;
+//        [self flipCard:self.chosen cardCell:cell];
         if (chosenImageName == imageName) {
             // is matched
         } else {
             // not matched
         }
+        chosenImageName = @"";
 
     } else {
         // choose first card
-        self.chosen = true;
+        self.choosing = true;
+//        [self flipCard:self.chosen cardCell:cell];
         chosenImageName = imageName;
     }
-
-    if (self.matched) {
-
-    }
-
+    */
 }
+
+- (void)flipCard: (BOOL)isTapAllowed cardCell:(CardCell *)cell {
+
+    UIViewAnimationOptions animationType = isTapAllowed ?
+    UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionTransitionFlipFromLeft;
+
+    [UIView
+     transitionWithView:cell.imageView
+     duration:.5
+     options:animationType animations:^{
+
+//         NSLog(@"%lu", (unsigned long)animationType);
+         //        __weak typeof (self) weakSelf = self;
+         //        weakSelf.myImageView.image = [UIImage imageNamed:@"who_am_i"];
+         cell.imageView.image = isTapAllowed ?
+         [UIImage imageNamed:@"noImg"] : [UIImage imageNamed:@"who_am_i"];
+
+     } completion:^(BOOL finished) {
+
+//         [UIView
+//          transitionWithView:self.startButton
+//          duration:.25
+//          options:UIViewAnimationOptionTransitionCrossDissolve
+//          animations:^{
+//              self.startButton.hidden = isTapAllowed;
+//          } completion:^(BOOL finished) {
+//              //
+//          }];
+     }];
+}
+
 
 #pragma mark - 👉 UICollectionViewDelegateFlowLayout
 
@@ -216,7 +318,8 @@
     layout:(UICollectionViewLayout *)collectionViewLayout
     sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
+//    CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
+    CGFloat width = (collectionView.bounds.size.width - (self.row - 1) * 10) / self.row;
 //    NSLog(@"%@, %f", @"👉 sizeForItemAtIndexPath", width);
     return CGSizeMake(width, width);
 }
@@ -228,16 +331,16 @@
     
     CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
 //    NSLog(@"%@, %f", @"👉 minimumInteritemSpacingForSectionAtIndex", width);
-    return width;
+    return 10;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)
-    collectionView layout:(UICollectionViewLayout *)collectionViewLayout
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+    layout:(UICollectionViewLayout *)collectionViewLayout
     minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    
+
     CGFloat width = collectionView.bounds.size.width / (self.row * 2 - 1);
 //    NSLog(@"%@, %f", @"👉 minimumLineSpacingForSectionAtIndex", width);
-    return width;
+    return 10;
 }
 
 #pragma mark - Getter and Setter
@@ -251,13 +354,13 @@
 }
 */
 
-// 改名也是自動建好
-- (BOOL)isChosen {
-    return _chosen;
+// 有改名也是自動建好
+- (BOOL)isChoosing {
+    return _choosing;
 }
 
-- (void)setChosen:(BOOL)chosen {
-    _chosen = chosen;
+- (void)setChoosing:(BOOL)choosing {
+    _choosing = choosing;
 }
 
 - (BOOL)isMatched {

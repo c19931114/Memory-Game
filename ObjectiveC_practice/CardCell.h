@@ -10,9 +10,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CardCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *imageview;
+typedef enum MatchStatus {
+    choosing,
+    isMatched,
+    unMatched,
+} MatchStatus;
 
+@interface CardCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic,strong) NSString *imageName;
+@property (nonatomic) BOOL isChosen;
+@property (nonatomic, copy) MatchStatus (^flipppppp)(NSString *cardName);
+
+
+- (void)flipCard: (BOOL)isTapAllowed;
 
 @end
 
