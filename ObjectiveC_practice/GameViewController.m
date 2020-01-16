@@ -203,8 +203,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     NSString *imageName = pickedNames[indexPath.row];
-    if (indexPath == firstIndexPath) { return; }
+
     if (self.choosing) {
+        
         // choose seconcd card
         self.choosing = false;
 
@@ -214,23 +215,20 @@
         [secondCell flipCard:YES];
 
         if (chosenImageName == imageName) {
+
             // is matched
-          
+
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                NSLog(@"Do some work");
                 [firstCell dismiss];
-                firstCell.userInteractionEnabled = NO;
                 [secondCell dismiss];
-                secondCell.userInteractionEnabled = NO;
             });
-
         } else {
+
             // not matched
 
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                NSLog(@"Do some work");
                 [firstCell flipCard:NO];
                 [secondCell flipCard:NO];
             });
@@ -239,45 +237,14 @@
 
     } else {
         // choose first card
+
         self.choosing = true;
         chosenImageName = imageName;
-
         firstIndexPath = indexPath;
         CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:firstIndexPath];
         [firstCell flipCard:YES];
     }
 }
-
-- (void)flipCard: (BOOL)isTapAllowed cardCell:(CardCell *)cell {
-
-    UIViewAnimationOptions animationType = isTapAllowed ?
-    UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionTransitionFlipFromLeft;
-
-    [UIView
-     transitionWithView:cell.imageView
-     duration:.5
-     options:animationType animations:^{
-
-//         NSLog(@"%lu", (unsigned long)animationType);
-         //        __weak typeof (self) weakSelf = self;
-         //        weakSelf.myImageView.image = [UIImage imageNamed:@"who_am_i"];
-         cell.imageView.image = isTapAllowed ?
-         [UIImage imageNamed:@"noImg"] : [UIImage imageNamed:@"who_am_i"];
-
-     } completion:^(BOOL finished) {
-
-//         [UIView
-//          transitionWithView:self.startButton
-//          duration:.25
-//          options:UIViewAnimationOptionTransitionCrossDissolve
-//          animations:^{
-//              self.startButton.hidden = isTapAllowed;
-//          } completion:^(BOOL finished) {
-//              //
-//          }];
-     }];
-}
-
 
 #pragma mark - 👉 UICollectionViewDelegateFlowLayout
 

@@ -35,9 +35,9 @@
 //    self.imageView.clipsToBounds = NO;
     self.clipsToBounds = NO;
 
-//    [self.imageView setUserInteractionEnabled:YES];
-//    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc]
-//                                               initWithTarget:self action:@selector(handleSingleTap:)];
+    //    [self.imageView setUserInteractionEnabled:YES];
+    //    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc]
+    //                                               initWithTarget:self action:@selector(handleSingleTap:)];
 //    [self.imageView addGestureRecognizer: singleFingerTap];
 }
 
@@ -68,12 +68,14 @@
 
 - (void)flipCard: (BOOL)isTapAllowed {
 
+    self.userInteractionEnabled = !isTapAllowed;
+    NSLog(@"%d", isTapAllowed);
     UIViewAnimationOptions animationType = isTapAllowed ?
         UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionTransitionFlipFromLeft;
 
     [UIView
      transitionWithView:self.imageView
-     duration:.2
+     duration:.45
      options:animationType animations:^{
 
 //         NSLog(@"%lu", (unsigned long)animationType);
@@ -88,40 +90,39 @@
 
 - (void)dismiss {
     
-    [self dismissss:self.imageView];
-//    [UIView
-//     transitionWithView:self.imageView
-//     duration:5
-//     options:UIViewAnimationOptionTransitionCrossDissolve
-//     animations:^{
-//         [self.imageView removeFromSuperview];
-//     } completion:^(BOOL finished) {
-//     }];
+    [self dismissss:self];
 }
 
 - (void)dismissss: (UIView *)view {
-    
-    view.alpha = 1.0;
-    view.transform = CGAffineTransformMakeScale(1.05, 1.05);
-    
+
+    self.userInteractionEnabled = NO;
     [UIView
-     animateWithDuration:1.5//0.15
+     animateWithDuration:.15
      animations:^{
          view.alpha = 1.0;
-         view.transform = CGAffineTransformMakeScale(0.95, 0.95);
-    } completion:^(BOOL finished) {
-        
-        [UIView
-         animateWithDuration:1.5//0.15
-         animations:^{
-             view.alpha = 1.0;
-             view.transform = CGAffineTransformMakeScale(0, 0);
-         } completion:^(BOOL finished) {
-//             [view removeFromSuperview];
-             NSLog(@"animation finish");
-         }];
-    }];
-    
+         view.transform = CGAffineTransformMakeScale(1.05, 1.05);
+     }
+     completion:^(BOOL finished) {
+
+         [UIView
+          animateWithDuration:0.15
+          animations:^{
+              view.alpha = 1.0;
+              view.transform = CGAffineTransformMakeScale(0.95, 0.95);
+          } completion:^(BOOL finished) {
+
+              [UIView
+               animateWithDuration:0.15
+               animations:^{
+                   view.alpha = 1.0;
+                   view.transform = CGAffineTransformMakeScale(0.3, 0.3);
+               } completion:^(BOOL finished) {
+                   [view removeFromSuperview];
+                   NSLog(@"animation finish");
+               }];
+          }];
+
+     }];
 }
 /*
  
