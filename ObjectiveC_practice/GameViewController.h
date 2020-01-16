@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GameViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myCollectionView;
+@property (weak, nonatomic) IBOutlet UIImageView *winImageView;
 @property (nonatomic) int row;
 
 @end

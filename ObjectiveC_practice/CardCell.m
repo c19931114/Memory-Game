@@ -7,6 +7,7 @@
 //
 
 #import "CardCell.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation CardCell
 
@@ -95,6 +96,10 @@
 
 - (void)dismissss: (UIView *)view {
 
+//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{
+        //
+    });
     self.userInteractionEnabled = NO;
     [UIView
      animateWithDuration:.15

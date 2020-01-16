@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "CardCell.h"
+#import <AudioToolbox/AudioToolbox.h> 
 
 @interface GameViewController () <UICollectionViewDataSource , UICollectionViewDelegateFlowLayout>
 {
@@ -18,6 +19,7 @@
     NSString *chosenImageName;
     NSIndexPath *firstIndexPath;
     NSIndexPath *secondIndexPath;
+    NSInteger cardCount;
 }
 @property (strong, nonatomic) NSString *content;
 @property (nonatomic, getter=isChoosing) BOOL choosing;
@@ -55,7 +57,8 @@
 
     //initialize and set then ready to accept elements
 //    pickedNames = [[NSMutableArray alloc] init];
-    self.row = 4; // 只能偶數
+    self.row = 2; // 只能偶數
+    cardCount = self.row * self.row;
     fullScreenSize = UIScreen.mainScreen.bounds.size;
     imageNames = [NSMutableArray new];
     pickedNames = [NSMutableArray new];//[[NSMutableArray alloc] initWithArray:@[@"first"]];
@@ -118,7 +121,15 @@
     
 //    [self.view setBackgroundColor: UIColor.whiteColor];
 //    self.view.backgroundColor = UIColor.whiteColor;
+    [self.winImageView setHidden:YES];
+    [self.winImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc]
+                                               initWithTarget:self action:@selector(handleSingleTap:)];
+    [self.winImageView addGestureRecognizer: singleFingerTap];
+}
 
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)setupCollectionView {
@@ -129,8 +140,7 @@
     
 //    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout alloc];
 //    [layout setMinimumLineSpacing: 10];
-    
-    
+
     self.myCollectionView.dataSource = self;
     self.myCollectionView.delegate = self;
 }
@@ -145,9 +155,9 @@
 (nonnull UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
 
-    int count = self.row * self.row;
+//    int count = self.row * self.row;
     //    NSLog(@"%d", count);
-    return count;
+    return cardCount;
 }
 
 
@@ -223,6 +233,16 @@
                 [firstCell dismiss];
                 [secondCell dismiss];
             });
+            cardCount -= 2;
+
+            if (cardCount == 0) {
+
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
+//                    [self.winImageView setHidden:NO];
+                });
+            }
         } else {
 
             // not matched

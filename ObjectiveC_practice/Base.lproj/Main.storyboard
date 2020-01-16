@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M47-f3-ffO">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M47-f3-ffO">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -80,7 +82,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2q1-rX-LF7" secondAttribute="height" multiplier="1:1" id="82a-g2-GKg"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7b6-Ah-Brp">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7b6-Ah-Brp">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -88,17 +90,25 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G1Q-vL-ghJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GZT-yA-sNa" firstAttribute="trailing" secondItem="2q1-rX-LF7" secondAttribute="trailing" id="5A7-pH-RMY"/>
                             <constraint firstItem="2q1-rX-LF7" firstAttribute="leading" secondItem="GZT-yA-sNa" secondAttribute="leading" id="5pf-0q-bmU"/>
+                            <constraint firstItem="G1Q-vL-ghJ" firstAttribute="top" secondItem="GZT-yA-sNa" secondAttribute="top" id="GPh-5u-bdt"/>
+                            <constraint firstItem="G1Q-vL-ghJ" firstAttribute="leading" secondItem="GZT-yA-sNa" secondAttribute="leading" id="P32-Kc-vd9"/>
+                            <constraint firstItem="GZT-yA-sNa" firstAttribute="trailing" secondItem="G1Q-vL-ghJ" secondAttribute="trailing" id="Qkc-WY-W4n"/>
                             <constraint firstItem="2q1-rX-LF7" firstAttribute="top" secondItem="GZT-yA-sNa" secondAttribute="top" id="eE3-tf-nd2"/>
+                            <constraint firstItem="GZT-yA-sNa" firstAttribute="bottom" secondItem="G1Q-vL-ghJ" secondAttribute="bottom" id="i1Z-pp-EZK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GZT-yA-sNa"/>
                     </view>
                     <connections>
                         <outlet property="myCollectionView" destination="2q1-rX-LF7" id="hdO-RP-iWG"/>
+                        <outlet property="winImageView" destination="G1Q-vL-ghJ" id="PvR-Iu-Ur1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8W5-ub-cpO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
