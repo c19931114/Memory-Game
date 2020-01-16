@@ -21,7 +21,7 @@
 }
 @property (strong, nonatomic) NSString *content;
 @property (nonatomic, getter=isChoosing) BOOL choosing;
-@property (nonatomic, getter=isMatched) BOOL matched;
+@property (nonatomic, getter=isMatched) BOOL matched; //沒用到
 //@property (nonatomic) CGSize fullScreenSize;
 
 //@property (nonatomic,assign) NSInteger number1;
@@ -203,31 +203,25 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     NSString *imageName = pickedNames[indexPath.row];
+    if (indexPath == firstIndexPath) { return; }
     if (self.choosing) {
         // choose seconcd card
         self.choosing = false;
 
         secondIndexPath = indexPath;
+        CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->firstIndexPath];
         CardCell *secondCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->secondIndexPath];
         [secondCell flipCard:YES];
 
-
         if (chosenImageName == imageName) {
             // is matched
-            /*
-             let seconds = 4.0
-             DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-             // Put your code which should be executed with a delay here
-             }
-             */
+          
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 NSLog(@"Do some work");
-                CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->firstIndexPath];
-//                [firstCell flipCard:NO];
+                [firstCell dismiss];
                 firstCell.userInteractionEnabled = NO;
-                CardCell *secondCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->secondIndexPath];
-//                [secondCell flipCard:NO];
+                [secondCell dismiss];
                 secondCell.userInteractionEnabled = NO;
             });
 
@@ -237,9 +231,7 @@
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 NSLog(@"Do some work");
-                CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->firstIndexPath];
                 [firstCell flipCard:NO];
-                CardCell *secondCell = (CardCell *)[collectionView cellForItemAtIndexPath:self->secondIndexPath];
                 [secondCell flipCard:NO];
             });
         }
@@ -254,30 +246,6 @@
         CardCell *firstCell = (CardCell *)[collectionView cellForItemAtIndexPath:firstIndexPath];
         [firstCell flipCard:YES];
     }
-
-
-
-
-/*
-//    NSString *imageName = pickedNames[indexPath.row];
-    if (self.choosing) {
-        // choose seconcd card
-        self.choosing = false;
-//        [self flipCard:self.chosen cardCell:cell];
-        if (chosenImageName == imageName) {
-            // is matched
-        } else {
-            // not matched
-        }
-        chosenImageName = @"";
-
-    } else {
-        // choose first card
-        self.choosing = true;
-//        [self flipCard:self.chosen cardCell:cell];
-        chosenImageName = imageName;
-    }
-    */
 }
 
 - (void)flipCard: (BOOL)isTapAllowed cardCell:(CardCell *)cell {

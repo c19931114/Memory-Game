@@ -28,9 +28,12 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    self.layer.cornerRadius = 5;//cell.bounds.size.height / 2;
-    self.layer.borderColor = UIColor.whiteColor.CGColor;
-    self.layer.borderWidth = 3;
+    self.imageView.layer.cornerRadius = 5;
+//    self.layer.cornerRadius = 5;//cell.bounds.size.height / 2;
+//    self.layer.borderColor = UIColor.whiteColor.CGColor;
+//    self.layer.borderWidth = 1;
+//    self.imageView.clipsToBounds = NO;
+    self.clipsToBounds = NO;
 
 //    [self.imageView setUserInteractionEnabled:YES];
 //    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc]
@@ -73,16 +76,77 @@
      duration:.2
      options:animationType animations:^{
 
-         NSLog(@"%lu", (unsigned long)animationType);
+//         NSLog(@"%lu", (unsigned long)animationType);
          //        __weak typeof (self) weakSelf = self;
          //        weakSelf.myImageView.image = [UIImage imageNamed:@"who_am_i"];
          self.imageView.image = isTapAllowed ?
-         [UIImage imageNamed:self.imageName] : [UIImage imageNamed:@"noImg"];
+            [UIImage imageNamed:self.imageName] : [UIImage imageNamed:@"noImg"];
 
      } completion:^(BOOL finished) {
      }];
 }
 
-//- (void)dismiss
+- (void)dismiss {
+    
+    [self dismissss:self.imageView];
+//    [UIView
+//     transitionWithView:self.imageView
+//     duration:5
+//     options:UIViewAnimationOptionTransitionCrossDissolve
+//     animations:^{
+//         [self.imageView removeFromSuperview];
+//     } completion:^(BOOL finished) {
+//     }];
+}
 
+- (void)dismissss: (UIView *)view {
+    
+    view.alpha = 1.0;
+    view.transform = CGAffineTransformMakeScale(1.05, 1.05);
+    
+    [UIView
+     animateWithDuration:1.5//0.15
+     animations:^{
+         view.alpha = 1.0;
+         view.transform = CGAffineTransformMakeScale(0.95, 0.95);
+    } completion:^(BOOL finished) {
+        
+        [UIView
+         animateWithDuration:1.5//0.15
+         animations:^{
+             view.alpha = 1.0;
+             view.transform = CGAffineTransformMakeScale(0, 0);
+         } completion:^(BOOL finished) {
+//             [view removeFromSuperview];
+             NSLog(@"animation finish");
+         }];
+    }];
+    
+}
+/*
+ 
+ func bounceView(view: UIView) {
+     
+     view.alpha = 1.0
+     view.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+     
+     UIView.animate(withDuration: 0.15, animations: {
+         
+         view.alpha = 1.0
+         view.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+         
+     }) { (finish) in
+         
+         UIView.animate(withDuration: 0.15, animations: {
+             
+             view.alpha = 1.0
+             view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+             
+         }, completion: { (finish) in
+             print("animation finish")
+         })
+     }
+ }
+ 
+ */
 @end

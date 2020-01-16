@@ -24,6 +24,7 @@ typedef enum MatchStatus {
 
 
 - (void)flipCard: (BOOL)isTapAllowed;
+- (void)dismiss;
 
 @end
 

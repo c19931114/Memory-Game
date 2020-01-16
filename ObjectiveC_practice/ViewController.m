@@ -68,7 +68,8 @@
     [UIView
      transitionWithView:_myImageView
      duration:.5
-     options:animationType animations:^{
+     options:animationType
+     animations:^{
             
 //        NSLog(@"%lu", (unsigned long)animationType);
 //        __weak typeof (self) weakSelf = self;
